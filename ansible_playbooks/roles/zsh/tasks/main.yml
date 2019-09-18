@@ -1,0 +1,79 @@
+---
+
+- name: Get Shell
+  tags:
+    - zsh
+  shell: sudo -Hiu {{ user }} env 
+  register: current_shell
+
+- name: Install oh-my-zsh
+  block:
+  - name: Install zsh shell
+    apt:
+      name:
+        - zsh 
+  - name: Backup exsisting .zshrc
+    shell: "if [ -f /home/{{ user }}/.zshrc ]; then mv /home/{{ user }}/.zshrc /home/{{ user }}/.zshrc.old; fi"
+
+  - name: Clone Repository
+    git:
+      repo: https://github.com/robbyrussell/oh-my-zsh
+      dest: "/home/{{ user }}/.oh-my-zsh"
+    register: cloned
+
+  - name: Clone zsh-autosuggestions
+    git:
+      repo: https://github.com/zsh-users/zsh-autosuggestions
+      dest: "/home/{{ user }}/.oh-my-zsh/plugins/zsh-autosuggestions"
+
+  - name: Clone zsh-syntax-highlighting
+    git:
+      repo: https://github.com/zsh-users/zsh-syntax-highlighting
+      dest: "/home/{{ user }}/.oh-my-zsh/plugins/zsh-syntax-highlighting"
+
+  - name: Create new .zshrc
+    template:
+      src: templates/zshrc
+      dest: "/home/{{ user }}/.zshrc"
+    when: cloned is success
+
+  - name: Change user shell to zsh
+    command: "chsh -s /usr/bin/zsh {{ user }}"
+  tags:
+    - zsh
+  when: current_shell.stdout.find('zsh') == -1
+
+- name: Do the same for root
+  tags:
+    - zsh
+  block:
+    - name: Get Root Shell
+      shell: sudo -Hiu root env
+      register: root_shell
+
+    - name: Install oh-my-zsh
+      block:
+        - name: Backup exsisting root .zshrc
+          shell: "if [ -f /root/.zshrc ]; then mv /root/.zshrc /root/.zshrc.old; fi"
+    - name: Clone Repository for root
+      git:
+        repo: https://github.com/robbyrussell/oh-my-zsh
+        dest: /root/.oh-my-zsh
+      register: root_cloned
+
+    - name: Clone zsh-autosuggestions
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: /root/.oh-my-zsh/plugins/zsh-autosuggestions
+    - name: Clone zsh-syntax-highlighting
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting
+        dest: /root/.oh-my-zsh/plugins/zsh-syntax-highlighting
+    - name: Create new root .zshrc
+      template:
+        src: templates/zshrc
+        dest: /root/.zshrc
+      when: root_cloned is success
+    - name: Change root shell to zsh
+      command: chsh -s /usr/bin/zsh
+      when: root_shell.stdout.find('zsh') == -1

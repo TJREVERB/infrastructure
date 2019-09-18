@@ -1,0 +1,19 @@
+---
+
+- name: Install Utilities
+  apt:
+    name:
+      - git
+      - vim
+      - htop
+      - screen
+      - tmux
+      - wget
+      - curl
+      - nmap
+      - whois
+      - net-tools
+      - dnsutils 
+      - traceroute
+      - iperf
+  retries: 3

@@ -1,0 +1,27 @@
+---
+
+- name: Transfer sshd config
+  template:
+    src: files/sshd_config
+    dest: /etc/ssh/sshd_config
+
+- name: Restart SSH
+  service:
+    name: ssh
+    state: restarted
+
+- name: Copy over keys
+  authorized_key:
+    user: "{{ user }}"
+    key: '{{ item }}'
+  with_file:
+    - public_keys/pi@pi-cubesat
+
+- name: "Add {{ user }} if absent"
+  user:
+    name: "{{ user }}"
+    groups: "{{ groups }}"
+    append: yes
+    home: "/home/{{ user }}"
+    shell: "{{ shell }}"
+    password: "{{ password }}"

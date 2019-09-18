@@ -1,0 +1,17 @@
+---
+
+- name: Generate locales
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Set default locale to en_US.UTF-8
+  debconf:
+    name: locales
+    question: locales/default_environment_locale
+    value: en_US.UTF-8
+    vtype: select
+
+- name: Set timezone to US/Eastern
+  timezone:
+    name: US/Eastern

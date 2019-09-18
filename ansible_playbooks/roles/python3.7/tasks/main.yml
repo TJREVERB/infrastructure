@@ -1,0 +1,40 @@
+---
+
+- name: Transfer and Decompress Installation Files
+  block:
+  - name: Install build essentials
+    tags:
+      - apt
+    apt:
+      name:
+        - build-essential
+        - checkinstall
+        - libreadline-gplv2-dev
+        - libbz2-dev
+        - libncursesw5-dev
+        - libgdbm-dev
+        - zlib1g-dev
+        - liblzma-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libffi-dev
+  - name: Decompress tarball
+    unarchive:
+      src: files/Python-3.7.4.tar.xz
+      dest: /tmp
+  - name: Configure and Install Pyhton 3.7
+    block:
+      - name: Configure Python 3.7
+        command: ./configure
+        args:
+          creates: Makefile
+          chdir: /tmp/Python-3.7.4
+      - name: Install Python 3.7
+        command: make install
+        args:
+          chdir: /tmp/Python-3.7.4
+      - name: Upgrade pip and setuptools
+        shell: "{{ item }}"
+        with_items:
+          - pip3 install --upgrade pip
+          - pip3 install --upgrade setuptools

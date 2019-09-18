@@ -1,0 +1,9 @@
+- name: Configure Engineering Model Computers
+  hosts: engineering
+  remote_user: root
+  roles:
+    - common
+    - auth
+    - python3.7
+    - engineering
+    - zsh

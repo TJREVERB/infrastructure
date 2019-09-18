@@ -1,0 +1,29 @@
+---
+
+- name: Configure localisation options
+  tags:
+    - locale
+  import_task: locale.yml
+- name: Update and Install
+  block:
+    - name: Install Aptitude
+      apt:
+        name: aptitude
+        state: present
+    - name: Update Packages
+      tags:
+        - apt
+        - upgrade
+      apt:
+        update_cache: yes
+        upgrade: full
+    - name: Install Utils
+      tags:
+        - apt
+        - utils
+      import_task: utils.yml
+    - name: Clean up
+      tags:
+        - apt
+      apt:
+        autoremove: yes

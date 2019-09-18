@@ -1,0 +1,8 @@
+- name: Configure Flight Computer
+  hosts: flight
+  remote_user: root
+  roles:
+    - common
+    - auth
+    - python3.7
+    - flight
