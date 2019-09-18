@@ -1,0 +1,21 @@
+---
+
+- name: Clone pFS repo
+    git:  
+      repo: "https://github.com/TJREVERB/pfs"
+      dest: /home/pi/pFS
+
+- name: Install global pip packages
+    pip:
+      executable: /usr/local/bin/pip3
+      name:
+        - pipenv
+        - invoke
+        - autopep8
+      extra_args: "--user"
+    become_user: "{{ user }}"
+
+- name: Install pFS dependencies
+  shell: invoke deploy
+  args:
+    chdir: /home/pi/pfs
