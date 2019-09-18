@@ -33,3 +33,6 @@ The developer shall:
 4. Start developing code to resolve the issue
 5. Push new code to `origin/[BRANCH-NAME]`
 6. Open a Pull Request once finished
+
+---
+Last Modified on 09/18/2019 by Anup Bagali
