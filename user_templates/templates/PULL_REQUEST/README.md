@@ -28,3 +28,7 @@ The leads shall:
 The developer shal:
 * Wait until a review is submitted for their Pull Request
 * As soon as a review is submitted, make the appropriate changes and resubmit the Pull Request as soon as possible, making sure to request reviews
+
+
+---
+Last Modified on 09/18/2019 by Anup Bagali

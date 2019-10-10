@@ -20,3 +20,6 @@ This repo contains generic boilerplate templates for new and exsisting members o
 	* This template outlines the manner in which new pull requests pertaining to a certain issue for the current flight software be created
 	* The team member shall:
 	  - Open a new pull request on the current flight software repository following the process outlined in `templates/PULL_REQUEST`
+
+---
+Last Modified on 09/18/2019 by Anup Bagali
