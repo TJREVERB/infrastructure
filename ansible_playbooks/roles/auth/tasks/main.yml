@@ -4,11 +4,8 @@
   template:
     src: files/sshd_config
     dest: /etc/ssh/sshd_config
-
-- name: Restart SSH
-  service:
-    name: ssh
-    state: restarted
+  notify:
+    - restart ssh
 
 - name: Copy over keys
   authorized_key:
