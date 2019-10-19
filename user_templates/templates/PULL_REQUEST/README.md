@@ -6,7 +6,7 @@ It is good practice to always save a copy of working code. The way to do this us
 Learn More About [Pull Requests](https://help.github.com/en/articles/about-pull-requests)
 
 ### Why do we use Pull Requests?
-Since we wish to maintain a `master` branch, it is necessary to use Pull Requests to conduct ad hoc code reviews and merge proper code. Be creating Pull Requests code that is ready to merge can be reviewed first before being merged into the `master` branch
+Since we wish to maintain a `master` branch, it is necessary to use Pull Requests to conduct ad hoc code reviews and merge proper code. By creating Pull Requests code that is ready to merge can be reviewed first before being merged into the `master` branch
 
 ### How do you open a Pull Requests?
 [Opening Pull Requests](https://help.github.com/en/articles/creating-a-pull-request)
@@ -31,4 +31,4 @@ The developer shal:
 
 
 ---
-Last Modified on 09/18/2019 by Anup Bagali
+Last Modified on 10/18/2019 by Anup Bagali
