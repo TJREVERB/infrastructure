@@ -25,7 +25,7 @@ The leads shall:
 * Review submitted Pull Request changes and make comments on recommended changes
 * Approve and merge the Pull Request if no changes are required
 
-The developer shal:
+The developer shall:
 * Wait until a review is submitted for their Pull Request
 * As soon as a review is submitted, make the appropriate changes and resubmit the Pull Request as soon as possible, making sure to request reviews
 
